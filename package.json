@@ -21,14 +21,15 @@
     "react-dom": "19.2.0",
     "react-hot-toast": "^2.6.0"
   },
-  "devDependencies": {
+   "devDependencies": {
     "@tailwindcss/postcss": "^4.0.0",
-    "@types/node": "^20.19.17",
-    "@types/react": "^19.2.2",
-    "@types/react-dom": "^19.2.2",
-    "eslint": "^9.38.0",
+    "@types/node": "^20",
+    "@types/react": "^19",
+    "@types/react-dom": "^19",
+    "@types/nodemailer": "^6.4.17",
+    "eslint": "^9",
     "eslint-config-next": "16.2.10",
-    "tailwindcss": "^4.1.14",
-    "typescript": "^5.9.3"
+    "tailwindcss": "^4",
+    "typescript": "^5"
   }
 }
