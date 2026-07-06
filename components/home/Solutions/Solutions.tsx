@@ -26,14 +26,6 @@ const mainSolution = {
 
 const otherSolutions = [
   {
-    icon: Globe,
-    title: "Website Development",
-    description:
-      "Modern hotel websites designed to maximize direct bookings and showcase your property beautifully.",
-    color: "bg-blue-100",
-    iconColor: "text-blue-600",
-  },
-  {
     icon: BarChart3,
     title: "Digital Marketing",
     description:
