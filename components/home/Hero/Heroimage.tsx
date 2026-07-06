@@ -54,7 +54,7 @@ export default function HeroImage() {
 
           <div className="rounded-full bg-white px-5 py-2 text-xs font-medium text-slate-500 shadow-sm">
 
-            genesisdigital.com
+            genesisdigital.in
 
           </div>
 
