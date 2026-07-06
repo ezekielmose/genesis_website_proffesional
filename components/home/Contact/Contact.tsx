@@ -1,5 +1,6 @@
 "use client";
 
+import { useState } from "react";
 import { motion } from "framer-motion";
 import {
   Mail,
@@ -34,13 +35,100 @@ const contactInfo = [
 ];
 
 export default function Contact() {
+
+  const [formData, setFormData] = useState({
+    fullName: "",
+    email: "",
+    company: "",
+    service: "Hotel Video Production",
+    message: "",
+  });
+
+  const [loading, setLoading] = useState(false);
+
+  const [success, setSuccess] = useState("");
+
+  const [error, setError] = useState("");
+
+  const handleChange = (
+    e: React.ChangeEvent<
+      HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement
+    >
+  ) => {
+
+    setFormData({
+      ...formData,
+      [e.target.name]: e.target.value,
+    });
+
+  };
+
+  const handleSubmit = async (
+    e: React.FormEvent<HTMLFormElement>
+  ) => {
+
+    e.preventDefault();
+
+    setSuccess("");
+    setError("");
+
+    if (
+      !formData.fullName.trim() ||
+      !formData.email.trim() ||
+      !formData.company.trim() ||
+      !formData.message.trim()
+    ) {
+      setError("Please fill in all required fields.");
+      return;
+    }
+
+    try {
+
+      setLoading(true);
+
+      const response = await fetch("/api/contact", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(formData),
+      });
+
+      const result = await response.json();
+
+      if (!response.ok) {
+        throw new Error(result.error || "Failed to send message.");
+      }
+
+      setSuccess(
+        "Your message has been sent successfully. We will contact you shortly."
+      );
+
+      setFormData({
+        fullName: "",
+        email: "",
+        company: "",
+        service: "Hotel Video Production",
+        message: "",
+      });
+
+    } catch (err: any) {
+
+      setError(err.message || "Something went wrong.");
+
+    } finally {
+
+      setLoading(false);
+
+    }
+
+  };
+
   return (
     <section
       id="contact"
       className="relative overflow-hidden bg-slate-900 py-28 text-white"
     >
-      {/* Background Glow */}
-
       <div className="absolute left-1/2 top-0 h-[500px] w-[500px] -translate-x-1/2 rounded-full bg-blue-600/20 blur-[180px]" />
 
       <div className="relative mx-auto max-w-7xl px-6">
@@ -84,61 +172,24 @@ export default function Contact() {
               const Icon = item.icon;
 
               return (
-
                 <div
                   key={item.title}
                   className="flex items-start gap-5 rounded-3xl bg-white/5 p-6 backdrop-blur-md"
                 >
 
                   <div className="flex h-14 w-14 items-center justify-center rounded-2xl bg-blue-600">
-
                     <Icon size={24} />
-
                   </div>
 
                   <div>
-
-                    <h3 className="text-xl font-semibold">
-
-                      {item.title}
-
-                    </h3>
-
-                    <p className="mt-2 text-slate-300">
-
-                      {item.value}
-
-                    </p>
-
+                    <h3 className="text-xl font-semibold">{item.title}</h3>
+                    <p className="mt-2 text-slate-300">{item.value}</p>
                   </div>
 
                 </div>
-
               );
 
             })}
-
-            {/* Why Contact */}
-
-            <div className="rounded-3xl bg-gradient-to-r from-blue-600 to-violet-700 p-8">
-
-              <h3 className="text-2xl font-bold">
-
-                Why Choose Genesis Digital?
-
-              </h3>
-
-              <ul className="mt-6 space-y-3 text-blue-100">
-
-                <li>✓ Hospitality Industry Specialists</li>
-                <li>✓ Cinematic 4K Video Production</li>
-                <li>✓ Modern Website Development</li>
-                <li>✓ AI Powered Quality Validation</li>
-                <li>✓ Fast Project Delivery</li>
-
-              </ul>
-
-            </div>
 
           </motion.div>
 
@@ -151,22 +202,38 @@ export default function Contact() {
             className="lg:col-span-3"
           >
 
-            <form className="rounded-[36px] bg-white p-10 text-slate-900 shadow-2xl">
+            <form
+              onSubmit={handleSubmit}
+              className="rounded-[36px] bg-white p-10 text-slate-900 shadow-2xl"
+            >
+
+              {error && (
+                <div className="mb-6 rounded-xl bg-red-100 p-4 text-red-700">
+                  {error}
+                </div>
+              )}
+
+              {success && (
+                <div className="mb-6 rounded-xl bg-green-100 p-4 text-green-700">
+                  {success}
+                </div>
+              )}
 
               <div className="grid gap-6 md:grid-cols-2">
 
                 <div>
 
                   <label className="mb-2 block font-semibold">
-
                     Full Name
-
                   </label>
 
                   <input
                     type="text"
+                    name="fullName"
+                    value={formData.fullName}
+                    onChange={handleChange}
                     placeholder="FirstName LastName"
-                    className="w-full rounded-xl border border-slate-300 px-5 py-4 outline-none transition focus:border-blue-600"
+                    className="w-full rounded-xl border border-slate-300 px-5 py-4 outline-none focus:border-blue-600"
                   />
 
                 </div>
@@ -174,15 +241,16 @@ export default function Contact() {
                 <div>
 
                   <label className="mb-2 block font-semibold">
-
                     Email Address
-
                   </label>
 
                   <input
                     type="email"
-                    placeholder="youremail@example.com"
-                    className="w-full rounded-xl border border-slate-300 px-5 py-4 outline-none transition focus:border-blue-600"
+                    name="email"
+                    value={formData.email}
+                    onChange={handleChange}
+                    placeholder="you@example.com"
+                    className="w-full rounded-xl border border-slate-300 px-5 py-4 outline-none focus:border-blue-600"
                   />
 
                 </div>
@@ -192,15 +260,16 @@ export default function Contact() {
               <div className="mt-6">
 
                 <label className="mb-2 block font-semibold">
-
                   Company
-
                 </label>
 
                 <input
                   type="text"
+                  name="company"
+                  value={formData.company}
+                  onChange={handleChange}
                   placeholder="Hotel / Resort Name"
-                  className="w-full rounded-xl border border-slate-300 px-5 py-4 outline-none transition focus:border-blue-600"
+                  className="w-full rounded-xl border border-slate-300 px-5 py-4 outline-none focus:border-blue-600"
                 />
 
               </div>
@@ -208,23 +277,20 @@ export default function Contact() {
               <div className="mt-6">
 
                 <label className="mb-2 block font-semibold">
-
                   Service Needed
-
                 </label>
 
-                <select className="w-full rounded-xl border border-slate-300 px-5 py-4 outline-none focus:border-blue-600">
-
+                <select
+                  name="service"
+                  value={formData.service}
+                  onChange={handleChange}
+                  className="w-full rounded-xl border border-slate-300 px-5 py-4 outline-none focus:border-blue-600"
+                >
                   <option>Hotel Video Production</option>
-
                   <option>Website Development</option>
-
                   <option>Digital Marketing</option>
-
                   <option>AI Video Validation</option>
-
                   <option>Custom Solution</option>
-
                 </select>
 
               </div>
@@ -232,27 +298,29 @@ export default function Contact() {
               <div className="mt-6">
 
                 <label className="mb-2 block font-semibold">
-
                   Tell Us About Your Project
-
                 </label>
 
                 <textarea
                   rows={6}
+                  name="message"
+                  value={formData.message}
+                  onChange={handleChange}
                   placeholder="Describe your project..."
-                  className="w-full rounded-xl border border-slate-300 px-5 py-4 outline-none transition focus:border-blue-600"
+                  className="w-full rounded-xl border border-slate-300 px-5 py-4 outline-none focus:border-blue-600"
                 />
 
               </div>
 
               <button
                 type="submit"
-                className="mt-8 flex items-center gap-3 rounded-2xl bg-gradient-to-r from-blue-600 to-violet-700 px-8 py-4 font-semibold text-white transition hover:scale-105"
+                disabled={loading}
+                className="mt-8 flex w-full items-center justify-center gap-3 rounded-2xl bg-gradient-to-r from-blue-600 to-violet-700 px-8 py-4 font-semibold text-white transition hover:scale-105 disabled:cursor-not-allowed disabled:opacity-60"
               >
 
                 <Send size={20} />
 
-                Send Message
+                {loading ? "Sending..." : "Send Message"}
 
                 <ArrowRight size={18} />
 
@@ -263,17 +331,6 @@ export default function Contact() {
           </motion.div>
 
         </div>
-
-        {/* Google Map Placeholder */}
-
-        <motion.div
-          initial={{ opacity: 0, y: 40 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          className="mt-24 overflow-hidden rounded-[36px] bg-slate-800"
-        >
-
-        </motion.div>
 
       </div>
 
