@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { motion } from "framer-motion";
-import { ArrowRight, PlayCircle } from "lucide-react";
+/*import { ArrowRight, PlayCircle } from "lucide-react";*/
 
 export default function HeroButtons() {
   return (
