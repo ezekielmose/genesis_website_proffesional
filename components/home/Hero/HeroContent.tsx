@@ -31,7 +31,7 @@ export default function HeroContent() {
 
       {/* Heading */}
 
-      <h1 className="max-w-xl text-5xl font-black leading-tight text-white lg:text-7xl">
+      <h1 className="max-w-xl text-[20px] sm:text-[28px] md:text-[36px] lg:text-[48px] font-black leading-tight text-white">
 
         Create{" "}
 
