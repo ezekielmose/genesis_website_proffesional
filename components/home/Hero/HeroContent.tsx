@@ -80,10 +80,7 @@ export default function HeroContent() {
         transition={{ delay: 0.8 }}
         className="mt-10 flex items-center gap-3"
       >
-        <PlayCircle
-          size={20}
-          className="text-blue-400"
-        />
+
 
       </motion.div>
 
