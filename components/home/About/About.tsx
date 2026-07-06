@@ -59,10 +59,11 @@ export default function About() {
             <div className="overflow-hidden rounded-[40px] shadow-2xl">
 
               <Image
-                src="/images/about/about.jpg"
-                alt="Genesis Digital"
+                src="https://images.unsplash.com/photo-1445019980597-93fa8acb246c?auto=format&fit=crop&w=1200&q=80"
+                alt="Luxury Hotel Interior"
                 width={700}
                 height={800}
+                unoptimized
                 className="w-full object-cover"
               />
 
