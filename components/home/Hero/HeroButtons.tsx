@@ -6,9 +6,7 @@ import { ArrowRight } from "lucide-react";
 
 export default function HeroButtons() {
   return (
-    <div className="flex flex-col gap-4 sm:flex-row">
-
-      {/* Primary Button */}
+    <div className="flex">
 
       <Link href="/contact">
 
@@ -70,47 +68,6 @@ export default function HeroButtons() {
             />
 
           </span>
-
-        </motion.button>
-
-      </Link>
-
-      {/* Secondary Button */}
-
-      <Link href="/portfolio">
-
-        <motion.button
-          whileHover={{
-            scale: 1.03,
-            y: -2,
-          }}
-          whileTap={{
-            scale: 0.97,
-          }}
-          transition={{
-            duration: 0.2,
-          }}
-          className="
-            group
-            rounded-2xl
-            border
-            border-slate-300
-            bg-white/70
-            px-8
-            py-4
-            font-semibold
-            text-slate-800
-            shadow-lg
-            backdrop-blur-md
-            transition-all
-            duration-300
-            hover:border-blue-300
-            hover:bg-blue-50
-            hover:text-blue-600
-          "
-        >
-
-          Watch Our Work
 
         </motion.button>
 
