@@ -161,13 +161,7 @@ export default function Features() {
                   {feature.description}
                 </p>
 
-                <div className="flex items-center gap-2 font-semibold text-blue-600">
-
-                  <CheckCircle2 size={18} />
-
-                  Included with every project
-
-                </div>
+                
 
               </motion.div>
 
