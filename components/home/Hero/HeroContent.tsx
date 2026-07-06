@@ -66,11 +66,6 @@ export default function HeroContent() {
 
       {/* Buttons */}
 
-      <div className="mt-10">
-
-        <HeroButtons />
-
-      </div>
 
       {/* Client Logos */}
 
