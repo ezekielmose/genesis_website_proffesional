@@ -1,11 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
-import {
-  Check,
-  ArrowRight,
-  Star,
-} from "lucide-react";
+import { Check, ArrowRight, Star } from "lucide-react";
 
 const plans = [
   {
@@ -63,19 +59,17 @@ export default function Pricing() {
       id="pricing"
       className="relative overflow-hidden bg-white py-28"
     >
-      {/* Background */}
-
+      {/* Background Glow */}
       <div className="absolute left-1/2 top-0 h-[450px] w-[450px] -translate-x-1/2 rounded-full bg-blue-500/10 blur-[140px]" />
 
       <div className="relative mx-auto max-w-7xl px-6">
 
         {/* Heading */}
-
         <motion.div
           initial={{ opacity: 0, y: 40 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          transition={{ duration: .7 }}
+          transition={{ duration: 0.7 }}
           className="mx-auto mb-20 max-w-3xl text-center"
         >
           <span className="rounded-full bg-blue-100 px-5 py-2 text-sm font-semibold text-blue-700">
@@ -92,31 +86,23 @@ export default function Pricing() {
           </p>
         </motion.div>
 
-        {/* Cards */}
-
+        {/* Pricing Cards */}
         <div className="grid gap-10 lg:grid-cols-3">
 
           {plans.map((plan, index) => (
 
             <motion.div
               key={plan.name}
-              initial={{
-                opacity: 0,
-                y: 40,
-              }}
-              whileInView={{
-                opacity: 1,
-                y: 0,
-              }}
-              viewport={{
-                once: true,
-              }}
+              initial={{ opacity: 0, y: 40 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
               transition={{
-                delay: index * .15,
-                duration: .7,
+                delay: index * 0.15,
+                duration: 0.7,
               }}
               whileHover={{
-                y: -12,
+                y: -10,
+                scale: 1.02,
               }}
               className={`relative overflow-hidden rounded-3xl border transition-all duration-500 ${
                 plan.featured
@@ -125,22 +111,22 @@ export default function Pricing() {
               }`}
             >
 
+              {/* Popular Badge */}
               {plan.featured && (
-
-                <div className="absolute right-5 top-5 flex items-center gap-2 rounded-full bg-white px-4 py-2 text-sm font-semibold text-blue-700">
-
-                  <Star size={16} fill="currentColor" />
-
+                <div className="absolute right-5 top-5 flex items-center gap-2 rounded-full bg-white px-4 py-2 text-sm font-semibold text-blue-700 shadow-lg">
+                  <Star
+                    size={16}
+                    fill="currentColor"
+                  />
                   Popular
-
                 </div>
-
               )}
 
               <div className="p-10">
 
+                {/* Badge */}
                 <p
-                  className={`text-sm font-semibold uppercase tracking-wider ${
+                  className={`text-sm font-semibold uppercase tracking-widest ${
                     plan.featured
                       ? "text-blue-100"
                       : "text-blue-600"
@@ -149,30 +135,48 @@ export default function Pricing() {
                   {plan.badge}
                 </p>
 
-                <h3 className="mt-4 text-3xl font-black">
-
+                {/* Plan Name */}
+                <h3
+                  className={`mt-4 text-3xl font-black ${
+                    plan.featured
+                      ? "text-white"
+                      : "text-slate-900"
+                  }`}
+                >
                   {plan.name}
-
                 </h3>
 
-                <h4 className="mt-8 text-4xl font-black">
-
+                {/* Price */}
+                <h4
+                  className={`mt-8 text-4xl font-black ${
+                    plan.featured
+                      ? "text-white"
+                      : "text-slate-900"
+                  }`}
+                >
                   {plan.price}
-
                 </h4>
 
+                {/* Description */}
                 <p
                   className={`mt-6 leading-7 ${
                     plan.featured
                       ? "text-blue-100"
-                      : "text-slate-600"
+                      : "text-slate-700"
                   }`}
                 >
                   {plan.description}
                 </p>
 
-                <div className="my-10 h-px bg-white/20" />
+                <div
+                  className={`my-10 h-px ${
+                    plan.featured
+                      ? "bg-white/20"
+                      : "bg-slate-200"
+                  }`}
+                />
 
+                {/* Features */}
                 <div className="space-y-5">
 
                   {plan.features.map((feature) => (
@@ -181,6 +185,7 @@ export default function Pricing() {
                       key={feature}
                       className="flex items-center gap-4"
                     >
+
                       <div
                         className={`flex h-8 w-8 items-center justify-center rounded-full ${
                           plan.featured
@@ -198,7 +203,15 @@ export default function Pricing() {
                         />
                       </div>
 
-                      <span>{feature}</span>
+                      <span
+                        className={
+                          plan.featured
+                            ? "text-white"
+                            : "font-medium text-slate-900"
+                        }
+                      >
+                        {feature}
+                      </span>
 
                     </div>
 
@@ -206,17 +219,17 @@ export default function Pricing() {
 
                 </div>
 
+                {/* Button */}
                 <button
                   className={`mt-12 flex w-full items-center justify-center gap-3 rounded-2xl px-6 py-4 font-semibold transition-all duration-300 ${
                     plan.featured
                       ? "bg-white text-blue-700 hover:scale-105"
-                      : "bg-blue-600 text-white hover:bg-blue-700"
+                      : "bg-blue-600 text-white hover:bg-blue-700 hover:scale-105"
                   }`}
                 >
                   Request Quote
 
                   <ArrowRight size={18} />
-
                 </button>
 
               </div>
@@ -227,29 +240,16 @@ export default function Pricing() {
 
         </div>
 
-        {/* Bottom Section */}
-
+        {/* Bottom CTA */}
         <motion.div
-          initial={{
-            opacity: 0,
-            y: 30,
-          }}
-          whileInView={{
-            opacity: 1,
-            y: 0,
-          }}
-          viewport={{
-            once: true,
-          }}
-          transition={{
-            delay: .5,
-          }}
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ delay: 0.5 }}
           className="mx-auto mt-24 max-w-5xl rounded-3xl bg-slate-900 px-12 py-16 text-center text-white"
         >
           <h3 className="text-4xl font-bold">
-
             Need a Custom Hospitality Solution?
-
           </h3>
 
           <p className="mx-auto mt-6 max-w-3xl text-lg leading-8 text-slate-300">
