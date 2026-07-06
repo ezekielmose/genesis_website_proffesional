@@ -67,7 +67,7 @@ export default function HeroImage() {
         <div className="relative">
 
           <Image
-            src="public/images/hero-main.PNG"
+            src="/images/hero-main.PNG"
             alt="Genesis Digital"
             width={700}
             height={700}
