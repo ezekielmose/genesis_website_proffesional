@@ -221,17 +221,21 @@ export default function Pricing() {
 
                 {/* Button */}
                 <button
-                  className={`mt-12 flex w-full items-center justify-center gap-3 rounded-2xl px-6 py-4 font-semibold transition-all duration-300 ${
-                    plan.featured
-                      ? "bg-white text-blue-700 hover:scale-105"
-                      : "bg-blue-600 text-white hover:bg-blue-700 hover:scale-105"
-                  }`}
-                >
-                  Request Quote
-
-                  <ArrowRight size={18} />
-                </button>
-
+                    onClick={() => {
+                      document.getElementById("contact")?.scrollIntoView({
+                        behavior: "smooth",
+                        block: "start",
+                      });
+                    }}
+                    className={`mt-12 flex w-full items-center justify-center gap-3 rounded-2xl px-6 py-4 font-semibold transition-all duration-300 ${
+                      plan.featured
+                        ? "bg-white text-blue-700 hover:scale-105"
+                        : "bg-blue-600 text-white hover:bg-blue-700"
+                    }`}
+                  >
+                    Request Quote
+                    <ArrowRight size={18} />
+                  </button>
               </div>
 
             </motion.div>
