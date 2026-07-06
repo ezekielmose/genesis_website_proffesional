@@ -85,13 +85,6 @@ export default function HeroContent() {
           className="text-blue-400"
         />
 
-        <span className="text-sm font-medium text-slate-200">
-
-          Watch how we transform hospitality brands with
-          cinematic storytelling.
-
-        </span>
-
       </motion.div>
 
       {/* Client Logos */}
