@@ -18,7 +18,7 @@ const cards = [
   },
   {
     icon: CheckCircle2,
-    title: "98%",
+    title: "90%",
     subtitle: "Client Satisfaction",
     color: "text-green-600",
     bg: "bg-green-100",
