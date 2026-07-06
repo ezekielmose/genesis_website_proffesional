@@ -83,7 +83,7 @@ export default function About() {
             >
               <h2 className="text-5xl font-black text-blue-600">
 
-                10+
+                2+
 
               </h2>
 
