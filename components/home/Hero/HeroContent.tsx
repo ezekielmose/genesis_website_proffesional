@@ -72,18 +72,6 @@ export default function HeroContent() {
 
       </div>
 
-      {/* Watch Demo */}
-
-      <motion.div
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ delay: 0.8 }}
-        className="mt-10 flex items-center gap-3"
-      >
-
-
-      </motion.div>
-
       {/* Client Logos */}
 
       <div className="mt-12">
@@ -95,15 +83,10 @@ export default function HeroContent() {
         </p>
 
         <div className="flex flex-wrap items-center gap-8 text-lg font-bold text-white/80">
-
+          
+          <span>Unravel</span>
           <span>Booking.com</span>
-
           <span>Expedia</span>
-
-          <span>Agoda</span>
-
-          <span>Airbnb</span>
-
           <span>Trip.com</span>
 
         </div>
