@@ -1,8 +1,8 @@
-
 "use client";
 
 import Link from "next/link";
 import { motion } from "framer-motion";
+import { ArrowRight, PlayCircle } from "lucide-react";
 
 export default function HeroButtons() {
   return (
@@ -113,6 +113,22 @@ export default function HeroButtons() {
           "
         >
 
+          <div
+            className="
+              flex
+              h-10
+              w-10
+              items-center
+              justify-center
+              rounded-full
+              bg-blue-100
+              transition-all
+              duration-300
+              group-hover:bg-blue-600
+            "
+          >
+
+          </div>
 
           Watch Our Work
 
