@@ -22,7 +22,7 @@ const features = [
   },
   {
     icon: Plane,
-    title: "Professional Drone Coverage",
+    title: "Professional Coverage",
     description:
       "Capture breathtaking aerial perspectives that showcase your property's surroundings and unique location.",
     color: "bg-violet-100",
