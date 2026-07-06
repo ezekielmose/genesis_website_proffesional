@@ -47,19 +47,6 @@ export default function Hero() {
 
           </div>
 
-          {/* Bottom Information Card */}
-          <div className="absolute bottom-10 left-10 z-30 rounded-2xl bg-white/90 px-6 py-4 shadow-xl backdrop-blur-xl">
-
-            <p className="font-semibold text-slate-900">
-              Luxury Hotel Showcase
-            </p>
-
-            <p className="text-sm text-slate-500">
-              Cinematic Marketing Video
-            </p>
-
-          </div>
-
           {/* Floating Cards */}
           <FloatingCards />
 
