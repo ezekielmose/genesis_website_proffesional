@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { motion } from "framer-motion";
-/*import { ArrowRight, PlayCircle } from "lucide-react";*/
+import { ArrowRight } from "lucide-react";
 
 export default function HeroButtons() {
   return (
@@ -92,9 +92,6 @@ export default function HeroButtons() {
           }}
           className="
             group
-            flex
-            items-center
-            gap-3
             rounded-2xl
             border
             border-slate-300
@@ -112,23 +109,6 @@ export default function HeroButtons() {
             hover:text-blue-600
           "
         >
-
-          <div
-            className="
-              flex
-              h-10
-              w-10
-              items-center
-              justify-center
-              rounded-full
-              bg-blue-100
-              transition-all
-              duration-300
-              group-hover:bg-blue-600
-            "
-          >
-
-          </div>
 
           Watch Our Work
 
