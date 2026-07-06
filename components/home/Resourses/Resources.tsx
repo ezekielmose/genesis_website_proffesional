@@ -14,23 +14,34 @@ const resources = [
     title: "Luxury Hotel Video Portfolio",
     description:
       "Discover how cinematic storytelling helps luxury hotels increase visibility and bookings.",
-    image: "/images/resources/portfolio.jpg",
+
+    image:
+      "https://images.unsplash.com/photo-1566073771259-6a8506099945?auto=format&fit=crop&w=1200&q=80",
+
     icon: PlayCircle,
     badge: "Portfolio",
   },
+
   {
     title: "Hospitality Marketing Guide",
     description:
       "Learn proven digital marketing strategies that help hotels attract more direct bookings.",
-    image: "/images/resources/guide.jpg",
+
+    image:
+      "https://images.unsplash.com/photo-1522708323590-d24dbb6b0267?auto=format&fit=crop&w=1200&q=80",
+
     icon: BookOpen,
     badge: "Guide",
   },
+
   {
     title: "Case Study: 35% More Bookings",
     description:
       "See how one hotel increased online engagement and reservations using professional video content.",
-    image: "/images/resources/case-study.jpg",
+
+    image:
+      "https://images.unsplash.com/photo-1445019980597-93fa8acb246c?auto=format&fit=crop&w=1200&q=80",
+
     icon: FileText,
     badge: "Case Study",
   },
@@ -105,6 +116,7 @@ export default function Resources() {
                     src={resource.image}
                     alt={resource.title}
                     fill
+                    sizes="(max-width:768px) 100vw, 33vw"
                     className="object-cover transition duration-700 group-hover:scale-110"
                   />
 
@@ -130,15 +142,11 @@ export default function Resources() {
                   </div>
 
                   <h3 className="mb-4 text-2xl font-bold text-slate-900">
-
                     {resource.title}
-
                   </h3>
 
                   <p className="mb-8 leading-7 text-slate-600">
-
                     {resource.description}
-
                   </p>
 
                   <button className="flex items-center gap-2 font-semibold text-blue-600 transition-all group-hover:gap-4">
@@ -158,6 +166,7 @@ export default function Resources() {
           })}
 
         </div>
+
       </div>
     </section>
   );
