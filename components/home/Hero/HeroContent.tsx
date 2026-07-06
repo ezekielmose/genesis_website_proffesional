@@ -49,11 +49,7 @@ export default function HeroContent() {
 
         </span>{" "}
 
-        That Inspire Travel
-
-        <br />
-
-        & Increase Bookings.
+        That Inspire Travel & Increase Bookings.
 
       </h1>
 
