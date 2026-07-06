@@ -3,9 +3,7 @@
 import Image from "next/image";
 import HeroBackground from "./HeroBackground";
 import HeroContent from "./HeroContent";
-import FloatingCards from "./FloatingCard"
-import { Play } from "lucide-react";
-import { motion } from "framer-motion";
+import FloatingCards from "./FloatingCard";
 
 export default function Hero() {
   return (
@@ -21,8 +19,6 @@ export default function Hero() {
         <div className="relative h-[700px] overflow-hidden">
 
           {/* Background Image */}
-
-          
           <Image
             src="/images/hero/hero-main.png"
             alt="Genesis Digital"
@@ -40,24 +36,7 @@ export default function Hero() {
           {/* Bottom Gradient */}
           <div className="absolute inset-x-0 bottom-0 h-44 bg-gradient-to-t from-black/60 to-transparent" />
 
-
-          <motion.div
-            whileHover={{ scale: 1.08 }}
-            whileTap={{ scale: 0.95 }}
-            className="absolute inset-0 z-20 flex items-center justify-center"
-          >
-            <div className="flex h-24 w-24 cursor-pointer items-center justify-center rounded-full bg-white/90 shadow-2xl backdrop-blur-xl">
-
-              <Play
-                size={34}
-                className="ml-1 text-blue-600"
-                fill="currentColor"
-              />
-
-            </div>
-          </motion.div>
-
-          {/* Content Layer */}
+          {/* Hero Content */}
           <div className="relative z-20 flex h-full items-center">
 
             <div className="w-full px-10 lg:px-16">
@@ -68,24 +47,31 @@ export default function Hero() {
 
           </div>
 
-          {/* Floating Stats */}
+          {/* Bottom Information Card */}
+          <div className="absolute bottom-10 left-10 z-30 rounded-2xl bg-white/90 px-6 py-4 shadow-xl backdrop-blur-xl">
 
-          <div>
-            <FloatingCards />
+            <p className="font-semibold text-slate-900">
+              Luxury Hotel Showcase
+            </p>
+
+            <p className="text-sm text-slate-500">
+              Cinematic Marketing Video
+            </p>
+
           </div>
+
+          {/* Floating Cards */}
+          <FloatingCards />
 
         </div>
 
       </div>
 
       {/* Scroll Indicator */}
-
-      <div className="absolute bottom-8 left-1/2 hidden -translate-x-1/2 lg:flex flex-col items-center">
+      <div className="absolute bottom-8 left-1/2 hidden -translate-x-1/2 flex-col items-center lg:flex">
 
         <span className="mb-2 text-xs uppercase tracking-[0.3em] text-slate-400">
-
           Scroll
-
         </span>
 
         <div className="flex h-10 w-6 justify-center rounded-full border border-slate-300">
@@ -97,23 +83,5 @@ export default function Hero() {
       </div>
 
     </section>
-
-
-    
   );
-  <div className="absolute bottom-10 left-10 z-30 rounded-2xl bg-white/90 px-6 py-4 backdrop-blur-xl">
-
-  <p className="font-semibold text-slate-900">
-
-    Luxury Hotel Showcase
-
-  </p>
-
-  <p className="text-sm text-slate-500">
-
-    Cinematic Marketing Video
-
-  </p>
-
-</div>
 }
