@@ -102,7 +102,7 @@ export default function Solutions() {
 
         </motion.div>
 
-        <div className="grid gap-8 lg:grid-cols-3">
+        <div className="grid gap-8 lg:grid-cols-3 items-start">
 
           {/* FEATURED CARD */}
 
@@ -125,7 +125,7 @@ export default function Solutions() {
               y: -8,
               scale: 1.01,
             }}
-            className="relative overflow-hidden rounded-[36px] border border-white/10 bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 p-8 text-white shadow-2xl backdrop-blur-xl lg:col-span-2"
+            className="relative self-start overflow-hidden rounded-[36px] border border-white/10 bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 p-6 text-white shadow-2xl backdrop-blur-xl lg:col-span-2"
           >
 
             {/* Animated Glow */}
@@ -183,7 +183,7 @@ export default function Solutions() {
 
             {/* Feature Pills */}
 
-            <div className="mt-8 flex flex-wrap gap-4">
+            <div className="mt-8 flex flex-wrap gap-3">
 
               {mainSolution.features.map((feature) => (
 
@@ -219,7 +219,7 @@ export default function Solutions() {
               whileTap={{
                 scale: .95,
               }}
-              className="group mt-10 inline-flex items-center gap-3 rounded-2xl bg-blue-600 px-7 py-4 font-semibold transition hover:bg-blue-700"
+              className="group mt-6 inline-flex items-center gap-3 rounded-2xl bg-blue-600 px-7 py-4 font-semibold transition hover:bg-blue-700"
             >
 
               Explore Our Video Services
