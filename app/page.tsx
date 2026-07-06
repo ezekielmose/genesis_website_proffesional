@@ -14,7 +14,7 @@ export default function Home() {
   return (
     <main>
       <Navbar />
-      <hero />
+      <Hero/>
       <StatsSection/>
       <Solutions/>
       <Features/>
