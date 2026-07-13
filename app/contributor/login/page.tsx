@@ -26,9 +26,13 @@ export default function ContributorLogin() {
 
   const [loading, setLoading] = useState(false);
 
+  const [error, setError] = useState("");
+
   async function handleLogin(e: React.FormEvent) {
 
     e.preventDefault();
+
+    setError("");
 
     try {
 
@@ -40,15 +44,34 @@ export default function ContributorLogin() {
         password
       );
 
-      alert("Login Successful!");
-
       router.push("/contributor/dashboard");
 
     } catch (error: any) {
 
-      alert(error.message);
-
-    } finally {
+    switch (error.code) {
+  
+      case "auth/invalid-credential":
+      case "auth/wrong-password":
+        setError("Incorrect email or password.");
+        break;
+  
+      case "auth/user-not-found":
+        setError("No account found with this email.");
+        break;
+  
+      case "auth/invalid-email":
+        setError("Please enter a valid email address.");
+        break;
+  
+      case "auth/too-many-requests":
+        setError("Too many login attempts. Please try again later.");
+        break;
+  
+      default:
+        setError("Unable to login. Please try again.");
+    }
+  
+  } finally {
 
       setLoading(false);
 
