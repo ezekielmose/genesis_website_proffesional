@@ -146,7 +146,7 @@ export default function Contact() {
           </span>
 
           <h2 className="mt-6 text-5xl font-black">
-            Let's Build Something Amazing Together
+            Let Us Build Something Amazing Together
           </h2>
 
           <p className="mt-6 text-lg leading-8 text-slate-300">
