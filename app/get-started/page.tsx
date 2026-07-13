@@ -49,7 +49,7 @@ export default function GetStarted() {
 
           {/* Contributor */}
 
-          <Link href="/contributor">
+          <Link href="/contributor/signup">
             <div className="cursor-pointer rounded-3xl bg-white p-10 shadow-xl transition hover:-translate-y-2">
 
               <div className="mb-8 flex h-20 w-20 items-center justify-center rounded-2xl bg-violet-100">
