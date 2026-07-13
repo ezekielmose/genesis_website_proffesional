@@ -356,13 +356,19 @@ export default function Dashboard() {
 
           </motion.div>
 
-          <motion.div
+         <motion.a
 
-            whileHover={{ y: -8 }}
-
-            className="rounded-3xl bg-white p-8 shadow-lg transition"
-
-          >
+                href="https://automations.tail6b7f5a.ts.net/sourcing/login"
+              
+                target="_blank"
+              
+                rel="noopener noreferrer"
+              
+                whileHover={{ y: -8 }}
+              
+                className="block rounded-3xl bg-white p-8 shadow-lg transition hover:shadow-xl cursor-pointer"
+              
+              >
 
             <UploadCloud className="mb-5 text-violet-600" size={42} />
 
@@ -374,19 +380,25 @@ export default function Dashboard() {
 
             <p className="mt-3 text-slate-600">
 
-              Upload hotel videos assigned to you.
+              Request a sign in details and start uploading today.
 
             </p>
 
-          </motion.div>
+          </motion.a>
 
-          <motion.div
+         <motion.a
 
-            whileHover={{ y: -8 }}
-
-            className="rounded-3xl bg-white p-8 shadow-lg transition"
-
-          >
+              href="https://www.genesisdigital.in/"
+            
+              target="_blank"
+            
+              rel="noopener noreferrer"
+            
+              whileHover={{ y: -8 }}
+            
+              className="block rounded-3xl bg-white p-8 shadow-lg transition hover:shadow-xl cursor-pointer"
+            
+            >
 
             <Globe className="mb-5 text-orange-500" size={42} />
 
@@ -402,7 +414,7 @@ export default function Dashboard() {
 
             </p>
 
-          </motion.div>
+          </motion.a>
 
         </div>
 
