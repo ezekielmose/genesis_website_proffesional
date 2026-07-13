@@ -2,244 +2,454 @@
 
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
-import Link from "next/link";
-
-import { auth, db } from "@/lib/firebase";
-
-import { onAuthStateChanged, signOut } from "firebase/auth";
-import { doc, getDoc } from "firebase/firestore";
 
 import {
+  doc,
+  getDoc,
+} from "firebase/firestore";
+
+import {
+  signOut,
+  onAuthStateChanged,
+} from "firebase/auth";
+
+import {
+  auth,
+  db,
+} from "@/lib/firebase";
+
+import {
+  Settings,
   User,
-  Mail,
-  Calendar,
+  BadgeCheck,
   LogOut,
-  Home,
-  Video,
-  Building2,
+  ChevronDown,
+  BarChart3,
+  Wallet,
+  UploadCloud,
+  Globe,
 } from "lucide-react";
 
-export default function ContributorDashboard() {
+import { motion } from "framer-motion";
+
+export default function Dashboard() {
+
   const router = useRouter();
 
   const [loading, setLoading] = useState(true);
-  const [userData, setUserData] = useState<any>(null);
+
+  const [firstName, setFirstName] = useState("");
+
+  const [role, setRole] = useState("Contributor");
+
+  const [menuOpen, setMenuOpen] = useState(false);
+
+  const [greeting, setGreeting] = useState("");
 
   useEffect(() => {
+
+    const hour = new Date().getHours();
+
+    if (hour < 12) {
+
+      setGreeting("Good Morning");
+
+    } else if (hour < 17) {
+
+      setGreeting("Good Afternoon");
+
+    } else {
+
+      setGreeting("Good Evening");
+
+    }
+
+  }, []);
+
+  useEffect(() => {
+
     const unsubscribe = onAuthStateChanged(auth, async (user) => {
+
       if (!user) {
+
         router.push("/contributor/login");
+
         return;
+
       }
 
       try {
+
         const docRef = doc(db, "contributors", user.uid);
+
         const docSnap = await getDoc(docRef);
 
         if (docSnap.exists()) {
-          setUserData(docSnap.data());
+
+          const data = docSnap.data();
+
+          setFirstName(data.firstName || "Contributor");
+
+          setRole(data.role || "Contributor");
+
         }
 
-        setLoading(false);
       } catch (error) {
-        console.error(error);
-        setLoading(false);
+
+        console.log(error);
+
       }
+
+      setLoading(false);
+
     });
 
     return () => unsubscribe();
+
   }, [router]);
 
   async function handleLogout() {
+
     await signOut(auth);
+
     router.push("/contributor/login");
+
   }
 
   if (loading) {
+
     return (
+
       <main className="flex min-h-screen items-center justify-center bg-slate-100">
-        <h2 className="text-2xl font-bold text-slate-700">
+
+        <div className="text-lg font-semibold">
+
           Loading Dashboard...
-        </h2>
+
+        </div>
+
       </main>
+
     );
+
   }
 
+
   return (
+
     <main className="min-h-screen bg-slate-100">
 
       {/* Header */}
 
-      <header className="bg-gradient-to-r from-blue-600 to-violet-700 px-8 py-6 text-white shadow-lg">
+      <header className="sticky top-0 z-40 border-b bg-white shadow-sm">
 
-        <div className="mx-auto flex max-w-7xl items-center justify-between">
+        <div className="mx-auto flex max-w-7xl items-center justify-between px-8 py-5">
 
           <div>
 
-            <h1 className="text-3xl font-black">
-              Contributor Dashboard
+            <h1 className="text-3xl font-black text-slate-900">
+
+              Genesis Digital
+
             </h1>
 
-            <p className="mt-1 text-blue-100">
-              Welcome back,
-              <span className="font-semibold">
-                {" "}
-                {userData?.fullName}
-              </span>
+            <p className="mt-1 text-slate-500">
+
+              Contributor Dashboard
+
             </p>
 
           </div>
 
-          <button
-            onClick={handleLogout}
-            className="flex items-center gap-2 rounded-xl bg-white px-5 py-3 font-semibold text-blue-700 hover:bg-blue-50"
-          >
-            <LogOut size={18} />
-            Logout
-          </button>
+          {/* Profile */}
+
+          <div className="relative">
+
+            <button
+
+              onClick={() => setMenuOpen(!menuOpen)}
+
+              className="flex items-center gap-3 rounded-xl border bg-white px-5 py-3 shadow transition hover:bg-slate-50"
+
+            >
+
+              <div className="flex h-10 w-10 items-center justify-center rounded-full bg-blue-600 font-bold text-white">
+
+                {firstName.charAt(0).toUpperCase()}
+
+              </div>
+
+              <div className="text-left">
+
+                <p className="font-semibold text-slate-900">
+
+                  {firstName}
+
+                </p>
+
+                <p className="text-sm text-slate-500">
+
+                  {role}
+
+                </p>
+
+              </div>
+
+              <ChevronDown
+                size={18}
+                className={`transition ${
+                  menuOpen ? "rotate-180" : ""
+                }`}
+              />
+
+            </button>
+
+            {/* Dropdown */}
+
+            {menuOpen && (
+
+              <motion.div
+
+                initial={{ opacity: 0, y: -10 }}
+
+                animate={{ opacity: 1, y: 0 }}
+
+                className="absolute right-0 mt-3 w-64 overflow-hidden rounded-2xl border bg-white shadow-2xl"
+
+              >
+
+                <button className="flex w-full items-center gap-3 px-6 py-4 text-left hover:bg-slate-100">
+
+                  <Settings size={18} />
+
+                  Settings
+
+                </button>
+
+                <button className="flex w-full items-center gap-3 px-6 py-4 text-left hover:bg-slate-100">
+
+                  <User size={18} />
+
+                  My Profile
+
+                </button>
+
+                <div className="flex items-center gap-3 border-t px-6 py-4">
+
+                  <BadgeCheck size={18} />
+
+                  <div>
+
+                    <p className="text-sm text-slate-500">
+
+                      Role
+
+                    </p>
+
+                    <p className="font-semibold">
+
+                      {role}
+
+                    </p>
+
+                  </div>
+
+                </div>
+
+                <button
+
+                  onClick={handleLogout}
+
+                  className="flex w-full items-center gap-3 border-t px-6 py-4 text-left text-red-600 hover:bg-red-50"
+
+                >
+
+                  <LogOut size={18} />
+
+                  Logout
+
+                </button>
+
+              </motion.div>
+
+            )}
+
+          </div>
 
         </div>
 
       </header>
 
-      <div className="mx-auto max-w-7xl px-6 py-10">
+      {/* Content */}
 
-        {/* Profile Card */}
+      <div className="mx-auto max-w-7xl px-8 py-10">
 
-        <div className="rounded-3xl bg-white p-8 shadow-xl">
+        <div className="mb-10">
 
-          <h2 className="mb-8 text-2xl font-bold text-slate-900">
-            My Profile
+          <h2 className="text-4xl font-black text-slate-900">
+
+            {greeting}, {firstName} 👋
+
           </h2>
 
-          <div className="grid gap-6 md:grid-cols-3">
+          <p className="mt-3 text-lg text-slate-600">
 
-            <div className="flex items-center gap-4 rounded-2xl bg-slate-50 p-5">
+            Welcome back to your Genesis Digital contributor dashboard.
 
-              <User className="text-blue-600" />
-
-              <div>
-
-                <p className="text-sm text-slate-500">
-                  Full Name
-                </p>
-
-                <p className="font-semibold text-slate-900">
-                  {userData?.fullName}
-                </p>
-
-              </div>
-
-            </div>
-
-            <div className="flex items-center gap-4 rounded-2xl bg-slate-50 p-5">
-
-              <Mail className="text-blue-600" />
-
-              <div>
-
-                <p className="text-sm text-slate-500">
-                  Email
-                </p>
-
-                <p className="font-semibold text-slate-900">
-                  {userData?.email}
-                </p>
-
-              </div>
-
-            </div>
-
-            <div className="flex items-center gap-4 rounded-2xl bg-slate-50 p-5">
-
-              <Calendar className="text-blue-600" />
-
-              <div>
-
-                <p className="text-sm text-slate-500">
-                  Role
-                </p>
-
-                <p className="font-semibold text-slate-900">
-                  {userData?.role}
-                </p>
-
-              </div>
-
-            </div>
-
-          </div>
+          </p>
 
         </div>
 
-        {/* Quick Actions */}
+        {/* Dashboard Cards */}
 
-        <div className="mt-10 grid gap-6 md:grid-cols-3">
+        <div className="grid gap-8 md:grid-cols-2">
 
-          <Link
-            href="#"
-            className="rounded-3xl bg-white p-8 shadow-xl transition hover:-translate-y-1"
+          <motion.div
+
+            whileHover={{ y: -8 }}
+
+            className="rounded-3xl bg-white p-8 shadow-lg transition"
+
           >
 
-            <Video
-              className="mb-5 text-blue-600"
-              size={40}
-            />
+            <BarChart3 className="mb-5 text-blue-600" size={42} />
 
             <h3 className="text-2xl font-bold text-slate-900">
-              Assigned Hotels
+
+              My Report
+
             </h3>
 
             <p className="mt-3 text-slate-600">
-              View hotels assigned to you.
+
+              View uploads, completed work and performance reports.
+
             </p>
 
-          </Link>
+          </motion.div>
 
-          <Link
-            href="#"
-            className="rounded-3xl bg-white p-8 shadow-xl transition hover:-translate-y-1"
+          <motion.div
+
+            whileHover={{ y: -8 }}
+
+            className="rounded-3xl bg-white p-8 shadow-lg transition"
+
           >
 
-            <Building2
-              className="mb-5 text-green-600"
-              size={40}
-            />
+            <Wallet className="mb-5 text-green-600" size={42} />
 
             <h3 className="text-2xl font-bold text-slate-900">
+
+              Finances
+
+            </h3>
+
+            <p className="mt-3 text-slate-600">
+
+              Monitor earnings, payments and invoices.
+
+            </p>
+
+          </motion.div>
+
+          <motion.div
+
+            whileHover={{ y: -8 }}
+
+            className="rounded-3xl bg-white p-8 shadow-lg transition"
+
+          >
+
+            <UploadCloud className="mb-5 text-violet-600" size={42} />
+
+            <h3 className="text-2xl font-bold text-slate-900">
+
               Upload Videos
+
             </h3>
 
             <p className="mt-3 text-slate-600">
-              Submit hotel videos for review.
+
+              Upload hotel videos assigned to you.
+
             </p>
 
-          </Link>
+          </motion.div>
 
-          <Link
-            href="/"
-            className="rounded-3xl bg-white p-8 shadow-xl transition hover:-translate-y-1"
+          <motion.div
+
+            whileHover={{ y: -8 }}
+
+            className="rounded-3xl bg-white p-8 shadow-lg transition"
+
           >
 
-            <Home
-              className="mb-5 text-violet-600"
-              size={40}
-            />
+            <Globe className="mb-5 text-orange-500" size={42} />
 
             <h3 className="text-2xl font-bold text-slate-900">
+
               Website
+
             </h3>
 
             <p className="mt-3 text-slate-600">
-              Return to Genesis Digital.
+
+              Visit the Genesis Digital website.
+
             </p>
 
-          </Link>
+          </motion.div>
+
+        </div>
+
+
+              {/* Quick Navigation */}
+
+        <div className="mt-12 rounded-3xl bg-white p-8 shadow-lg">
+
+          <h2 className="mb-6 text-2xl font-bold text-slate-900">
+
+            Quick Access
+
+          </h2>
+
+          <div className="flex flex-wrap gap-4">
+
+            <button
+              className="rounded-xl bg-blue-600 px-6 py-3 font-semibold text-white transition hover:bg-blue-700"
+            >
+              My Report
+            </button>
+
+            <button
+              className="rounded-xl bg-green-600 px-6 py-3 font-semibold text-white transition hover:bg-green-700"
+            >
+              Finances
+            </button>
+
+            <button
+              className="rounded-xl bg-violet-600 px-6 py-3 font-semibold text-white transition hover:bg-violet-700"
+            >
+              Upload Videos
+            </button>
+
+            <a
+              href="/"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="rounded-xl bg-orange-500 px-6 py-3 font-semibold text-white transition hover:bg-orange-600"
+            >
+              Website
+            </a>
+
+          </div>
 
         </div>
 
       </div>
 
     </main>
+
   );
+
 }
