@@ -158,6 +158,16 @@ export default function ContributorLogin() {
 
           </div>
 
+              {error && (
+    
+                    <div className="rounded-xl border border-red-300 bg-red-50 p-4 text-center font-medium text-red-700">
+                  
+                      {error}
+                  
+                    </div>
+                  
+                  )}
+
           <button
 
             disabled={loading}
