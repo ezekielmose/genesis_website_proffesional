@@ -1,4 +1,4 @@
-"use client";
+/*"use client";
 
 import { motion } from "framer-motion";
 import { Check, ArrowRight, Star } from "lucide-react";
@@ -58,14 +58,14 @@ export default function Pricing() {
     <section
       id="pricing"
       className="relative overflow-hidden bg-white py-28"
-    >
+    > */
       {/* Background Glow */}
-      <div className="absolute left-1/2 top-0 h-[450px] w-[450px] -translate-x-1/2 rounded-full bg-blue-500/10 blur-[140px]" />
+     /* <div className="absolute left-1/2 top-0 h-[450px] w-[450px] -translate-x-1/2 rounded-full bg-blue-500/10 blur-[140px]" />
 
-      <div className="relative mx-auto max-w-7xl px-6">
+      <div className="relative mx-auto max-w-7xl px-6"> */
 
         {/* Heading */}
-        <motion.div
+        /*<motion.div
           initial={{ opacity: 0, y: 40 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
@@ -84,10 +84,10 @@ export default function Pricing() {
             Every hotel is unique. We tailor every project to your goals,
             property size and marketing strategy.
           </p>
-        </motion.div>
+        </motion.div> */
 
         {/* Pricing Cards */}
-        <div className="grid gap-10 lg:grid-cols-3">
+       /* <div className="grid gap-10 lg:grid-cols-3">
 
           {plans.map((plan, index) => (
 
@@ -109,10 +109,10 @@ export default function Pricing() {
                   ? "border-blue-600 bg-gradient-to-b from-blue-600 to-violet-700 text-white shadow-2xl scale-105"
                   : "border-slate-200 bg-white shadow-xl"
               }`}
-            >
+            > */
 
               {/* Popular Badge */}
-              {plan.featured && (
+              /*{plan.featured && (
                 <div className="absolute right-5 top-5 flex items-center gap-2 rounded-full bg-white px-4 py-2 text-sm font-semibold text-blue-700 shadow-lg">
                   <Star
                     size={16}
@@ -122,10 +122,10 @@ export default function Pricing() {
                 </div>
               )}
 
-              <div className="p-10">
+              <div className="p-10"> */
 
                 {/* Badge */}
-                <p
+               /* <p
                   className={`text-sm font-semibold uppercase tracking-widest ${
                     plan.featured
                       ? "text-blue-100"
@@ -133,10 +133,10 @@ export default function Pricing() {
                   }`}
                 >
                   {plan.badge}
-                </p>
+                </p> */
 
                 {/* Plan Name */}
-                <h3
+                /*<h3
                   className={`mt-4 text-3xl font-black ${
                     plan.featured
                       ? "text-white"
@@ -144,10 +144,10 @@ export default function Pricing() {
                   }`}
                 >
                   {plan.name}
-                </h3>
+                </h3> */
 
                 {/* Price */}
-                <h4
+               /* <h4
                   className={`mt-8 text-4xl font-black ${
                     plan.featured
                       ? "text-white"
@@ -155,10 +155,10 @@ export default function Pricing() {
                   }`}
                 >
                   {plan.price}
-                </h4>
+                </h4> */
 
                 {/* Description */}
-                <p
+               /* <p
                   className={`mt-6 leading-7 ${
                     plan.featured
                       ? "text-blue-100"
@@ -174,10 +174,10 @@ export default function Pricing() {
                       ? "bg-white/20"
                       : "bg-slate-200"
                   }`}
-                />
+                /> */
 
                 {/* Features */}
-                <div className="space-y-5">
+                /*<div className="space-y-5">
 
                   {plan.features.map((feature) => (
 
@@ -217,10 +217,10 @@ export default function Pricing() {
 
                   ))}
 
-                </div>
+                </div> */
 
                 {/* Button */}
-                <button
+                /*<button
                     onClick={() => {
                       document.getElementById("contact")?.scrollIntoView({
                         behavior: "smooth",
@@ -242,10 +242,10 @@ export default function Pricing() {
 
           ))}
 
-        </div>
+        </div> */
 
         {/* Bottom CTA */}
-        <motion.div
+       /* <motion.div
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
@@ -270,4 +270,4 @@ export default function Pricing() {
       </div>
     </section>
   );
-}
+} */
