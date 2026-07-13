@@ -96,9 +96,9 @@ export const mobileNavItems = [
 
 export const ctaButton = {
   text: "Get Started",
-  href: "#contact",
+  href: "/get-started",
+  target: "_blank",
 };
-
 /* ---------------------------------- */
 /* Company Information                */
 /* ---------------------------------- */
