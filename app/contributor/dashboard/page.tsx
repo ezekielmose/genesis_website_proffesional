@@ -88,7 +88,9 @@ export default function Dashboard() {
 
           const data = docSnap.data();
 
-          setFirstName(data.firstName || "Contributor");
+          const first = (data.fullName || "Contributor").split(" ")[0];
+
+          setFirstName(first);
 
           setRole(data.role || "Contributor");
 
@@ -218,7 +220,8 @@ export default function Dashboard() {
 
               >
 
-                <button className="flex w-full items-center gap-3 px-6 py-4 text-left hover:bg-slate-100">
+                <button
+              className="flex w-full items-center gap-3 px-6 py-4 text-left text-slate-900 hover:bg-slate-100">
 
                   <Settings size={18} />
 
@@ -226,7 +229,8 @@ export default function Dashboard() {
 
                 </button>
 
-                <button className="flex w-full items-center gap-3 px-6 py-4 text-left hover:bg-slate-100">
+                <button
+              className="flex w-full items-center gap-3 px-6 py-4 text-left text-slate-900 hover:bg-slate-100">
 
                   <User size={18} />
 
@@ -246,7 +250,7 @@ export default function Dashboard() {
 
                     </p>
 
-                    <p className="font-semibold">
+                    <p className="font-semibold text-slate-900">
 
                       {role}
 
