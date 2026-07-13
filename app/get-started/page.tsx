@@ -64,8 +64,8 @@ export default function GetStarted() {
               </h2>
 
               <p className="mt-4 text-slate-600">
-                Join our global community of videographers, photographers,
-                editors and drone pilots.
+                Join our global community of video soursing, videographers, photographers, and
+                editors.
               </p>
 
               <div className="mt-8 flex items-center gap-2 text-violet-600 font-semibold">
