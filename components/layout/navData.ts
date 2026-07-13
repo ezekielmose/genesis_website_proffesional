@@ -73,11 +73,11 @@ export const mobileNavItems = [
     href: "#resources",
     icon: FileText,
   },
-  {
+  /*{
     title: "Pricing",
     href: "#pricing",
     icon: DollarSign,
-  },
+  },*/
   {
     title: "About",
     href: "#about",
