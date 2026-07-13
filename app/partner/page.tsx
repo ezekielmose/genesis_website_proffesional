@@ -1,19 +1,144 @@
 "use client";
 
+import { useState } from "react";
 import { motion } from "framer-motion";
-import { ArrowLeft, Send, Building2 } from "lucide-react";
+import {
+  ArrowLeft,
+  Send,
+  Building2,
+  Loader2,
+  CheckCircle,
+} from "lucide-react";
 import Link from "next/link";
 
 export default function PartnerPage() {
+  const [loading, setLoading] = useState(false);
+  const [success, setSuccess] = useState("");
+  const [error, setError] = useState("");
+
+  const [formData, setFormData] = useState({
+    companyName: "",
+    businessType: "",
+    contactPerson: "",
+    position: "",
+    email: "",
+    phone: "",
+    country: "",
+    city: "",
+    website: "",
+    properties: "",
+    budget: "",
+    timeline: "",
+    project: "",
+    services: [] as string[],
+  });
+
+  const services = [
+    "Hotel Video Production",
+    "Website Development",
+    "Digital Marketing",
+    "AI Video Validation",
+    "Drone Footage",
+    "Photography",
+    "Brand Strategy",
+    "Custom Solution",
+  ];
+
+  const handleChange = (
+    e: React.ChangeEvent<
+      HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement
+    >
+  ) => {
+    setFormData({
+      ...formData,
+      [e.target.name]: e.target.value,
+    });
+  };
+
+  const handleCheckbox = (service: string) => {
+    if (formData.services.includes(service)) {
+      setFormData({
+        ...formData,
+        services: formData.services.filter((s) => s !== service),
+      });
+    } else {
+      setFormData({
+        ...formData,
+        services: [...formData.services, service],
+      });
+    }
+  };
+
+  const handleSubmit = async (
+    e: React.FormEvent<HTMLFormElement>
+  ) => {
+    e.preventDefault();
+
+    setSuccess("");
+    setError("");
+
+    if (
+      !formData.companyName ||
+      !formData.businessType ||
+      !formData.contactPerson ||
+      !formData.email ||
+      !formData.phone
+    ) {
+      setError("Please fill in all required fields.");
+      return;
+    }
+
+    setLoading(true);
+
+    try {
+      const response = await fetch("/api/partner", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(formData),
+      });
+
+      const data = await response.json();
+
+      if (!response.ok) {
+        throw new Error(data.message);
+      }
+
+      setSuccess(
+        "Your partnership request has been submitted successfully. Our team will contact you shortly."
+      );
+
+      setFormData({
+        companyName: "",
+        businessType: "",
+        contactPerson: "",
+        position: "",
+        email: "",
+        phone: "",
+        country: "",
+        city: "",
+        website: "",
+        properties: "",
+        budget: "",
+        timeline: "",
+        project: "",
+        services: [],
+      });
+    } catch (err: any) {
+      setError(err.message || "Something went wrong.");
+    }
+
+    setLoading(false);
+  };
+
   return (
     <main className="min-h-screen bg-slate-50 py-20">
       <div className="mx-auto max-w-5xl px-6">
 
-        {/* Back Button */}
-
         <Link
           href="/get-started"
-          className="mb-10 inline-flex items-center gap-2 font-medium text-blue-600 transition hover:text-blue-700"
+          className="mb-10 inline-flex items-center gap-2 text-blue-600 hover:text-blue-700"
         >
           <ArrowLeft size={18} />
           Back
@@ -22,7 +147,7 @@ export default function PartnerPage() {
         <motion.div
           initial={{ opacity: 0, y: 40 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6 }}
+          transition={{ duration: .6 }}
           className="overflow-hidden rounded-[36px] bg-white shadow-2xl"
         >
 
@@ -40,7 +165,7 @@ export default function PartnerPage() {
               Become a Partner
             </h1>
 
-            <p className="mt-5 max-w-3xl text-lg leading-8 text-blue-100">
+            <p className="mt-5 max-w-3xl text-lg text-blue-100">
               We'd love to work with your hotel, resort, travel agency or
               hospitality business. Fill in the details below and our team
               will contact you shortly.
@@ -50,13 +175,29 @@ export default function PartnerPage() {
 
           {/* FORM */}
 
-          <form className="space-y-10 p-10">
+          <form
+            onSubmit={handleSubmit}
+            className="space-y-8 p-10"
+          >
 
-            {/* BUSINESS INFORMATION */}
+            {error && (
+              <div className="rounded-xl border border-red-300 bg-red-50 p-4 text-red-700">
+                {error}
+              </div>
+            )}
+
+            {success && (
+              <div className="flex items-center gap-3 rounded-xl border border-green-300 bg-green-50 p-4 text-green-700">
+                <CheckCircle size={22} />
+                {success}
+              </div>
+            )}
+
+            {/* Business Information */}
 
             <div>
 
-              <h2 className="mb-6 text-2xl font-bold text-slate-900">
+              <h2 className="mb-6 text-2xl font-bold text-black">
                 Business Information
               </h2>
 
@@ -64,29 +205,36 @@ export default function PartnerPage() {
 
                 <div>
 
-                  <label className="mb-2 block font-semibold text-slate-900">
+                  <label className="mb-2 block font-semibold text-black">
                     Hotel / Company Name *
                   </label>
 
                   <input
-                    type="text"
+                    name="companyName"
+                    value={formData.companyName}
+                    onChange={handleChange}
                     required
+                    type="text"
                     placeholder="Genesis Resort"
-                    className="w-full rounded-xl border border-slate-300 px-5 py-4 text-slate-900 placeholder:text-slate-400 outline-none transition focus:border-blue-600 focus:ring-2 focus:ring-blue-200"
+                    className="w-full rounded-xl border border-slate-300 px-5 py-4 text-black outline-none transition focus:border-blue-600"
                   />
 
                 </div>
 
                 <div>
 
-                  <label className="mb-2 block font-semibold text-slate-900">
+                  <label className="mb-2 block font-semibold text-black">
                     Business Type *
                   </label>
 
                   <select
+                    name="businessType"
+                    value={formData.businessType}
+                    onChange={handleChange}
                     required
-                    className="w-full rounded-xl border border-slate-300 bg-white px-5 py-4 text-slate-900 outline-none transition focus:border-blue-600 focus:ring-2 focus:ring-blue-200"
+                    className="w-full rounded-xl border border-slate-300 px-5 py-4 text-black outline-none focus:border-blue-600"
                   >
+                    <option value="">Select Business Type</option>
                     <option>Hotel</option>
                     <option>Resort</option>
                     <option>Safari Lodge</option>
@@ -102,236 +250,263 @@ export default function PartnerPage() {
 
             </div>
 
-            {/* CONTACT INFORMATION */}
+            {/* Contact Information */}
 
             <div>
 
-              <h2 className="mb-6 text-2xl font-bold text-slate-900">
+              <h2 className="mb-6 text-2xl font-bold text-black">
                 Contact Information
               </h2>
 
               <div className="grid gap-6 md:grid-cols-2">
 
-                <div>
+                <input
+                  name="contactPerson"
+                  value={formData.contactPerson}
+                  onChange={handleChange}
+                  required
+                  placeholder="Contact Person *"
+                  className="rounded-xl border border-slate-300 px-5 py-4 text-black outline-none focus:border-blue-600"
+                />
 
-                  <label className="mb-2 block font-semibold text-slate-900">
-                    Contact Person *
-                  </label>
+                <input
+                  name="position"
+                  value={formData.position}
+                  onChange={handleChange}
+                  placeholder="Position"
+                  className="rounded-xl border border-slate-300 px-5 py-4 text-black outline-none focus:border-blue-600"
+                />
 
-                  <input
-                    required
-                    placeholder="John Doe"
-                    className="w-full rounded-xl border border-slate-300 px-5 py-4 text-slate-900 placeholder:text-slate-400 outline-none transition focus:border-blue-600 focus:ring-2 focus:ring-blue-200"
-                  />
+                <input
+                  name="email"
+                  value={formData.email}
+                  onChange={handleChange}
+                  required
+                  type="email"
+                  placeholder="Email Address *"
+                  className="rounded-xl border border-slate-300 px-5 py-4 text-black outline-none focus:border-blue-600"
+                />
 
-                </div>
+                <input
+                  name="phone"
+                  value={formData.phone}
+                  onChange={handleChange}
+                  required
+                  placeholder="Phone Number *"
+                  className="rounded-xl border border-slate-300 px-5 py-4 text-black outline-none focus:border-blue-600"
+                />
 
-                <div>
+                <input
+                  name="country"
+                  value={formData.country}
+                  onChange={handleChange}
+                  placeholder="Country"
+                  className="rounded-xl border border-slate-300 px-5 py-4 text-black outline-none focus:border-blue-600"
+                />
 
-                  <label className="mb-2 block font-semibold text-slate-900">
-                    Position
-                  </label>
-
-                  <input
-                    placeholder="Marketing Manager"
-                    className="w-full rounded-xl border border-slate-300 px-5 py-4 text-slate-900 placeholder:text-slate-400 outline-none transition focus:border-blue-600 focus:ring-2 focus:ring-blue-200"
-                  />
-
-                </div>
-
-                <div>
-
-                  <label className="mb-2 block font-semibold text-slate-900">
-                    Email Address *
-                  </label>
-
-                  <input
-                    type="email"
-                    required
-                    placeholder="john@example.com"
-                    className="w-full rounded-xl border border-slate-300 px-5 py-4 text-slate-900 placeholder:text-slate-400 outline-none transition focus:border-blue-600 focus:ring-2 focus:ring-blue-200"
-                  />
-
-                </div>
-
-                <div>
-
-                  <label className="mb-2 block font-semibold text-slate-900">
-                    Phone Number *
-                  </label>
-
-                  <input
-                    required
-                    placeholder="+254..."
-                    className="w-full rounded-xl border border-slate-300 px-5 py-4 text-slate-900 placeholder:text-slate-400 outline-none transition focus:border-blue-600 focus:ring-2 focus:ring-blue-200"
-                  />
-
-                </div>
-
-                <div>
-
-                  <label className="mb-2 block font-semibold text-slate-900">
-                    Country
-                  </label>
-
-                  <input
-                    placeholder="Kenya"
-                    className="w-full rounded-xl border border-slate-300 px-5 py-4 text-slate-900 placeholder:text-slate-400 outline-none transition focus:border-blue-600 focus:ring-2 focus:ring-blue-200"
-                  />
-
-                </div>
-
-                <div>
-
-                  <label className="mb-2 block font-semibold text-slate-900">
-                    City
-                  </label>
-
-                  <input
-                    placeholder="Nairobi"
-                    className="w-full rounded-xl border border-slate-300 px-5 py-4 text-slate-900 placeholder:text-slate-400 outline-none transition focus:border-blue-600 focus:ring-2 focus:ring-blue-200"
-                  />
-
-                </div>
+                <input
+                  name="city"
+                  value={formData.city}
+                  onChange={handleChange}
+                  placeholder="City"
+                  className="rounded-xl border border-slate-300 px-5 py-4 text-black outline-none focus:border-blue-600"
+                />
 
               </div>
 
             </div>
 
-            {/* Services */}
 
-                        {/* Services */}
+              {/* Services */}
 
             <div>
-              <h2 className="mb-6 text-2xl font-bold text-slate-900">
+
+              <h2 className="mb-6 text-2xl font-bold text-black">
                 Services You're Interested In
               </h2>
 
               <div className="grid gap-4 md:grid-cols-2">
-                {[
-                  "Hotel Video Production",
-                  "Website Development",
-                  "Digital Marketing",
-                  "AI Video Validation",
-                  "Drone Footage",
-                  "Photography",
-                  "Brand Strategy",
-                  "Custom Solution",
-                ].map((service) => (
+
+                {services.map((service) => (
+
                   <label
                     key={service}
-                    className="flex cursor-pointer items-center gap-3 rounded-xl border border-slate-300 p-4 text-slate-900 transition hover:border-blue-600 hover:bg-blue-50"
+                    className="flex cursor-pointer items-center gap-3 rounded-xl border border-slate-300 p-4 transition hover:border-blue-600 hover:bg-blue-50"
                   >
+
                     <input
                       type="checkbox"
-                      className="h-5 w-5 accent-blue-600"
+                      checked={formData.services.includes(service)}
+                      onChange={() => handleCheckbox(service)}
+                      className="h-5 w-5"
                     />
 
-                    <span className="font-medium text-slate-900">
+                    <span className="font-medium text-black">
                       {service}
                     </span>
+
                   </label>
+
                 ))}
+
               </div>
+
             </div>
 
             {/* Company Details */}
 
             <div>
-              <h2 className="mb-6 text-2xl font-bold text-slate-900">
+
+              <h2 className="mb-6 text-2xl font-bold text-black">
                 Company Details
               </h2>
 
               <div className="grid gap-6 md:grid-cols-2">
-                <div>
-                  <label className="mb-2 block font-semibold text-slate-900">
-                    Company Website
-                  </label>
 
-                  <input
-                    type="url"
-                    placeholder="https://yourhotel.com"
-                    className="w-full rounded-xl border border-slate-300 px-5 py-4 text-slate-900 placeholder:text-slate-500 outline-none focus:border-blue-600"
-                  />
-                </div>
+                <input
+                  name="website"
+                  value={formData.website}
+                  onChange={handleChange}
+                  placeholder="Company Website"
+                  className="rounded-xl border border-slate-300 px-5 py-4 text-black outline-none transition focus:border-blue-600"
+                />
 
-                <div>
-                  <label className="mb-2 block font-semibold text-slate-900">
+                <select
+                  name="properties"
+                  value={formData.properties}
+                  onChange={handleChange}
+                  className="rounded-xl border border-slate-300 px-5 py-4 text-black outline-none transition focus:border-blue-600"
+                >
+
+                  <option value="">
                     Number of Properties
-                  </label>
+                  </option>
 
-                  <select
-                    className="w-full rounded-xl border border-slate-300 px-5 py-4 text-slate-900 outline-none focus:border-blue-600"
-                  >
-                    <option>1 Property</option>
-                    <option>2 - 5 Properties</option>
-                    <option>6 - 10 Properties</option>
-                    <option>11+ Properties</option>
-                  </select>
-                </div>
+                  <option>1</option>
+
+                  <option>2 - 5</option>
+
+                  <option>6 - 10</option>
+
+                  <option>11+</option>
+
+                </select>
+
               </div>
+
             </div>
 
-            {/* Budget */}
+            {/* Budget & Timeline */}
 
             <div className="grid gap-6 md:grid-cols-2">
+
               <div>
-                <label className="mb-2 block font-semibold text-slate-900">
+
+                <label className="mb-2 block font-semibold text-black">
                   Estimated Budget
                 </label>
 
                 <select
-                  className="w-full rounded-xl border border-slate-300 px-5 py-4 text-slate-900 outline-none focus:border-blue-600"
+                  name="budget"
+                  value={formData.budget}
+                  onChange={handleChange}
+                  className="w-full rounded-xl border border-slate-300 px-5 py-4 text-black outline-none transition focus:border-blue-600"
                 >
-                  <option>Let's Discuss</option>
+
+                  <option value="">
+                    Let's Discuss
+                  </option>
+
                   <option>Under $1,000</option>
+
                   <option>$1,000 - $5,000</option>
+
                   <option>$5,000 - $10,000</option>
+
                   <option>$10,000+</option>
+
                 </select>
+
               </div>
 
               <div>
-                <label className="mb-2 block font-semibold text-slate-900">
+
+                <label className="mb-2 block font-semibold text-black">
                   Project Timeline
                 </label>
 
                 <select
-                  className="w-full rounded-xl border border-slate-300 px-5 py-4 text-slate-900 outline-none focus:border-blue-600"
+                  name="timeline"
+                  value={formData.timeline}
+                  onChange={handleChange}
+                  className="w-full rounded-xl border border-slate-300 px-5 py-4 text-black outline-none transition focus:border-blue-600"
                 >
-                  <option>Immediately</option>
+
+                  <option value="">
+                    Immediately
+                  </option>
+
                   <option>Within 1 Month</option>
+
                   <option>1 - 3 Months</option>
+
                   <option>Just Exploring</option>
+
                 </select>
+
               </div>
+
             </div>
 
-            {/* Project */}
+            {/* Project Description */}
 
             <div>
-              <label className="mb-2 block font-semibold text-slate-900">
+
+              <label className="mb-2 block font-semibold text-black">
                 Tell us about your project
               </label>
 
               <textarea
+                name="project"
+                value={formData.project}
+                onChange={handleChange}
                 rows={7}
-                placeholder="Describe your hotel, your goals, and how Genesis Digital can help..."
-                className="w-full rounded-xl border border-slate-300 px-5 py-4 text-slate-900 placeholder:text-slate-500 outline-none focus:border-blue-600"
+                placeholder="Describe your hotel, goals and how Genesis Digital can help..."
+                className="w-full rounded-xl border border-slate-300 px-5 py-4 text-black outline-none transition focus:border-blue-600"
               />
+
             </div>
 
-            {/* Submit */}
+              {/* Submit Button */}
 
             <div className="pt-4">
+
               <button
                 type="submit"
-                className="flex items-center gap-3 rounded-2xl bg-gradient-to-r from-blue-600 to-violet-700 px-10 py-5 font-semibold text-white transition-all duration-300 hover:scale-105 hover:shadow-xl"
+                disabled={loading}
+                className="flex items-center gap-3 rounded-2xl bg-gradient-to-r from-blue-600 to-violet-700 px-10 py-5 font-semibold text-white transition hover:scale-105 disabled:cursor-not-allowed disabled:opacity-70"
               >
-                <Send size={20} />
 
-                Submit Partnership Request
+                {loading ? (
+                  <>
+                    <Loader2
+                      size={20}
+                      className="animate-spin"
+                    />
+
+                    Sending...
+
+                  </>
+                ) : (
+                  <>
+                    <Send size={20} />
+
+                    Submit Partnership Request
+                  </>
+                )}
+
               </button>
+
             </div>
 
           </form>
