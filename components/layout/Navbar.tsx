@@ -60,37 +60,41 @@ export default function Navbar() {
 
           {/* CTA Button */}
           <div className="hidden lg:block">
-            <Link href={ctaButton.href}>
-              <motion.button
-                whileHover={{
-                  scale: 1.05,
-                }}
-                whileTap={{
-                  scale: 0.96,
-                }}
-                className="
-                  flex
-                  items-center
-                  gap-2
-                  rounded-xl
-                  bg-gradient-to-r
-                  from-blue-600
-                  to-violet-600
-                  px-6
-                  py-3
-                  font-semibold
-                  text-white
-                  shadow-lg
-                  transition-all
-                  duration-300
-                  hover:shadow-xl
-                "
-              >
-                {ctaButton.text}
-
-                <ArrowRight size={18} />
-              </motion.button>
-            </Link>
+          <Link
+            href={ctaButton.href}
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <motion.button
+              whileHover={{
+                scale: 1.05,
+              }}
+              whileTap={{
+                scale: 0.96,
+              }}
+              className="
+                flex
+                items-center
+                gap-2
+                rounded-xl
+                bg-gradient-to-r
+                from-blue-600
+                to-violet-600
+                px-6
+                py-3
+                font-semibold
+                text-white
+                shadow-lg
+                transition-all
+                duration-300
+                hover:shadow-xl
+              "
+            >
+              {ctaButton.text}
+          
+              <ArrowRight size={18} />
+            </motion.button>
+          </Link>
           </div>
 
           {/* Mobile Menu Button */}
