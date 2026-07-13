@@ -13,7 +13,7 @@ export default function PartnerPage() {
 
         <Link
           href="/get-started"
-          className="mb-10 inline-flex items-center gap-2 text-blue-600 hover:text-blue-700"
+          className="mb-10 inline-flex items-center gap-2 font-medium text-blue-600 transition hover:text-blue-700"
         >
           <ArrowLeft size={18} />
           Back
@@ -22,7 +22,7 @@ export default function PartnerPage() {
         <motion.div
           initial={{ opacity: 0, y: 40 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: .6 }}
+          transition={{ duration: 0.6 }}
           className="overflow-hidden rounded-[36px] bg-white shadow-2xl"
         >
 
@@ -40,7 +40,7 @@ export default function PartnerPage() {
               Become a Partner
             </h1>
 
-            <p className="mt-5 max-w-3xl text-lg text-blue-100">
+            <p className="mt-5 max-w-3xl text-lg leading-8 text-blue-100">
               We'd love to work with your hotel, resort, travel agency or
               hospitality business. Fill in the details below and our team
               will contact you shortly.
@@ -48,11 +48,11 @@ export default function PartnerPage() {
 
           </div>
 
-          {/* Form */}
+          {/* FORM */}
 
-          <form className="space-y-8 p-10">
+          <form className="space-y-10 p-10">
 
-            {/* Business Information */}
+            {/* BUSINESS INFORMATION */}
 
             <div>
 
@@ -63,26 +63,29 @@ export default function PartnerPage() {
               <div className="grid gap-6 md:grid-cols-2">
 
                 <div>
-                  <label className="mb-2 block font-semibold">
+
+                  <label className="mb-2 block font-semibold text-slate-900">
                     Hotel / Company Name *
                   </label>
 
                   <input
                     type="text"
                     required
-                    className="w-full rounded-xl border border-slate-300 px-5 py-4 outline-none focus:border-blue-600"
                     placeholder="Genesis Resort"
+                    className="w-full rounded-xl border border-slate-300 px-5 py-4 text-slate-900 placeholder:text-slate-400 outline-none transition focus:border-blue-600 focus:ring-2 focus:ring-blue-200"
                   />
+
                 </div>
 
                 <div>
-                  <label className="mb-2 block font-semibold">
+
+                  <label className="mb-2 block font-semibold text-slate-900">
                     Business Type *
                   </label>
 
                   <select
                     required
-                    className="w-full rounded-xl border border-slate-300 px-5 py-4 outline-none focus:border-blue-600"
+                    className="w-full rounded-xl border border-slate-300 bg-white px-5 py-4 text-slate-900 outline-none transition focus:border-blue-600 focus:ring-2 focus:ring-blue-200"
                   >
                     <option>Hotel</option>
                     <option>Resort</option>
@@ -92,13 +95,14 @@ export default function PartnerPage() {
                     <option>Apartment</option>
                     <option>Other</option>
                   </select>
+
                 </div>
 
               </div>
 
             </div>
 
-            {/* Contact Information */}
+            {/* CONTACT INFORMATION */}
 
             <div>
 
@@ -108,39 +112,87 @@ export default function PartnerPage() {
 
               <div className="grid gap-6 md:grid-cols-2">
 
-                <input
-                  required
-                  placeholder="Contact Person *"
-                  className="rounded-xl border border-slate-300 px-5 py-4 outline-none focus:border-blue-600"
-                />
+                <div>
 
-                <input
-                  placeholder="Position"
-                  className="rounded-xl border border-slate-300 px-5 py-4 outline-none focus:border-blue-600"
-                />
+                  <label className="mb-2 block font-semibold text-slate-900">
+                    Contact Person *
+                  </label>
 
-                <input
-                  required
-                  type="email"
-                  placeholder="Email Address *"
-                  className="rounded-xl border border-slate-300 px-5 py-4 outline-none focus:border-blue-600"
-                />
+                  <input
+                    required
+                    placeholder="John Doe"
+                    className="w-full rounded-xl border border-slate-300 px-5 py-4 text-slate-900 placeholder:text-slate-400 outline-none transition focus:border-blue-600 focus:ring-2 focus:ring-blue-200"
+                  />
 
-                <input
-                  required
-                  placeholder="Phone Number *"
-                  className="rounded-xl border border-slate-300 px-5 py-4 outline-none focus:border-blue-600"
-                />
+                </div>
 
-                <input
-                  placeholder="Country"
-                  className="rounded-xl border border-slate-300 px-5 py-4 outline-none focus:border-blue-600"
-                />
+                <div>
 
-                <input
-                  placeholder="City"
-                  className="rounded-xl border border-slate-300 px-5 py-4 outline-none focus:border-blue-600"
-                />
+                  <label className="mb-2 block font-semibold text-slate-900">
+                    Position
+                  </label>
+
+                  <input
+                    placeholder="Marketing Manager"
+                    className="w-full rounded-xl border border-slate-300 px-5 py-4 text-slate-900 placeholder:text-slate-400 outline-none transition focus:border-blue-600 focus:ring-2 focus:ring-blue-200"
+                  />
+
+                </div>
+
+                <div>
+
+                  <label className="mb-2 block font-semibold text-slate-900">
+                    Email Address *
+                  </label>
+
+                  <input
+                    type="email"
+                    required
+                    placeholder="john@example.com"
+                    className="w-full rounded-xl border border-slate-300 px-5 py-4 text-slate-900 placeholder:text-slate-400 outline-none transition focus:border-blue-600 focus:ring-2 focus:ring-blue-200"
+                  />
+
+                </div>
+
+                <div>
+
+                  <label className="mb-2 block font-semibold text-slate-900">
+                    Phone Number *
+                  </label>
+
+                  <input
+                    required
+                    placeholder="+254..."
+                    className="w-full rounded-xl border border-slate-300 px-5 py-4 text-slate-900 placeholder:text-slate-400 outline-none transition focus:border-blue-600 focus:ring-2 focus:ring-blue-200"
+                  />
+
+                </div>
+
+                <div>
+
+                  <label className="mb-2 block font-semibold text-slate-900">
+                    Country
+                  </label>
+
+                  <input
+                    placeholder="Kenya"
+                    className="w-full rounded-xl border border-slate-300 px-5 py-4 text-slate-900 placeholder:text-slate-400 outline-none transition focus:border-blue-600 focus:ring-2 focus:ring-blue-200"
+                  />
+
+                </div>
+
+                <div>
+
+                  <label className="mb-2 block font-semibold text-slate-900">
+                    City
+                  </label>
+
+                  <input
+                    placeholder="Nairobi"
+                    className="w-full rounded-xl border border-slate-300 px-5 py-4 text-slate-900 placeholder:text-slate-400 outline-none transition focus:border-blue-600 focus:ring-2 focus:ring-blue-200"
+                  />
+
+                </div>
 
               </div>
 
@@ -148,14 +200,14 @@ export default function PartnerPage() {
 
             {/* Services */}
 
-            <div>
+                        {/* Services */}
 
+            <div>
               <h2 className="mb-6 text-2xl font-bold text-slate-900">
                 Services You're Interested In
               </h2>
 
               <div className="grid gap-4 md:grid-cols-2">
-
                 {[
                   "Hotel Video Production",
                   "Website Development",
@@ -166,131 +218,128 @@ export default function PartnerPage() {
                   "Brand Strategy",
                   "Custom Solution",
                 ].map((service) => (
-
                   <label
                     key={service}
-                    className="flex items-center gap-3 rounded-xl border border-slate-300 p-4 hover:border-blue-600"
+                    className="flex cursor-pointer items-center gap-3 rounded-xl border border-slate-300 p-4 text-slate-900 transition hover:border-blue-600 hover:bg-blue-50"
                   >
-
                     <input
                       type="checkbox"
-                      className="h-5 w-5"
+                      className="h-5 w-5 accent-blue-600"
                     />
 
-                    {service}
-
+                    <span className="font-medium text-slate-900">
+                      {service}
+                    </span>
                   </label>
-
                 ))}
-
               </div>
-
             </div>
 
             {/* Company Details */}
 
             <div>
-
               <h2 className="mb-6 text-2xl font-bold text-slate-900">
                 Company Details
               </h2>
 
               <div className="grid gap-6 md:grid-cols-2">
+                <div>
+                  <label className="mb-2 block font-semibold text-slate-900">
+                    Company Website
+                  </label>
 
-                <input
-                  placeholder="Company Website"
-                  className="rounded-xl border border-slate-300 px-5 py-4 outline-none focus:border-blue-600"
-                />
+                  <input
+                    type="url"
+                    placeholder="https://yourhotel.com"
+                    className="w-full rounded-xl border border-slate-300 px-5 py-4 text-slate-900 placeholder:text-slate-500 outline-none focus:border-blue-600"
+                  />
+                </div>
 
-                <select className="rounded-xl border border-slate-300 px-5 py-4 outline-none focus:border-blue-600">
+                <div>
+                  <label className="mb-2 block font-semibold text-slate-900">
+                    Number of Properties
+                  </label>
 
-                  <option>Number of Properties</option>
-                  <option>1</option>
-                  <option>2 - 5</option>
-                  <option>6 - 10</option>
-                  <option>11+</option>
-
-                </select>
-
+                  <select
+                    className="w-full rounded-xl border border-slate-300 px-5 py-4 text-slate-900 outline-none focus:border-blue-600"
+                  >
+                    <option>1 Property</option>
+                    <option>2 - 5 Properties</option>
+                    <option>6 - 10 Properties</option>
+                    <option>11+ Properties</option>
+                  </select>
+                </div>
               </div>
-
             </div>
 
             {/* Budget */}
 
             <div className="grid gap-6 md:grid-cols-2">
-
               <div>
-
-                <label className="mb-2 block font-semibold">
+                <label className="mb-2 block font-semibold text-slate-900">
                   Estimated Budget
                 </label>
 
-                <select className="w-full rounded-xl border border-slate-300 px-5 py-4 outline-none focus:border-blue-600">
-
+                <select
+                  className="w-full rounded-xl border border-slate-300 px-5 py-4 text-slate-900 outline-none focus:border-blue-600"
+                >
                   <option>Let's Discuss</option>
                   <option>Under $1,000</option>
                   <option>$1,000 - $5,000</option>
                   <option>$5,000 - $10,000</option>
                   <option>$10,000+</option>
-
                 </select>
-
               </div>
 
               <div>
-
-                <label className="mb-2 block font-semibold">
+                <label className="mb-2 block font-semibold text-slate-900">
                   Project Timeline
                 </label>
 
-                <select className="w-full rounded-xl border border-slate-300 px-5 py-4 outline-none focus:border-blue-600">
-
+                <select
+                  className="w-full rounded-xl border border-slate-300 px-5 py-4 text-slate-900 outline-none focus:border-blue-600"
+                >
                   <option>Immediately</option>
                   <option>Within 1 Month</option>
                   <option>1 - 3 Months</option>
                   <option>Just Exploring</option>
-
                 </select>
-
               </div>
-
             </div>
 
             {/* Project */}
 
             <div>
-
-              <label className="mb-2 block font-semibold">
+              <label className="mb-2 block font-semibold text-slate-900">
                 Tell us about your project
               </label>
 
               <textarea
                 rows={7}
-                placeholder="Describe your hotel, goals and how Genesis Digital can help..."
-                className="w-full rounded-xl border border-slate-300 px-5 py-4 outline-none focus:border-blue-600"
+                placeholder="Describe your hotel, your goals, and how Genesis Digital can help..."
+                className="w-full rounded-xl border border-slate-300 px-5 py-4 text-slate-900 placeholder:text-slate-500 outline-none focus:border-blue-600"
               />
-
             </div>
 
             {/* Submit */}
 
-            <button
-              type="submit"
-              className="flex items-center gap-3 rounded-2xl bg-gradient-to-r from-blue-600 to-violet-700 px-10 py-5 font-semibold text-white transition hover:scale-105"
-            >
+            <div className="pt-4">
+              <button
+                type="submit"
+                className="flex items-center gap-3 rounded-2xl bg-gradient-to-r from-blue-600 to-violet-700 px-10 py-5 font-semibold text-white transition-all duration-300 hover:scale-105 hover:shadow-xl"
+              >
+                <Send size={20} />
 
-              <Send size={20} />
-
-              Submit Partnership Request
-
-            </button>
+                Submit Partnership Request
+              </button>
+            </div>
 
           </form>
 
         </motion.div>
 
       </div>
+
     </main>
   );
 }
