@@ -23,29 +23,29 @@ import {
 
 const metrics = [
   {
-    target: 14000,
-    display: "14K+",
+    target: 29000,
+    display: "29K+",
     label: "Hotels Searched",
     icon: Building2,
   },
 
   {
-    target: 29000,
-    display: "29K+",
+    target: 46000,
+    display: "46K+",
     label: "Videos Generated",
     icon: Video,
   },
 
   {
-    target: 47,
-    display: "47+",
+    target: 83,
+    display: "83+",
     label: "Countries Reached",
     icon: Globe2,
   },
 
   {
-    target: 42,
-    display: "42%",
+    target: 92,
+    display: "92%",
     label: "Client Satisfaction",
     icon: Star,
   },
