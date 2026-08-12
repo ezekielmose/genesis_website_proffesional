@@ -1,0 +1,69 @@
+generator client {
+  provider = "prisma-client"
+  output   = "../src/generated/prisma"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+enum LeadType {
+  GENERAL_PROJECT
+  AI_RELIABILITY
+}
+
+enum Role {
+  ADMIN
+  QA_LEAD
+  EVALUATOR
+  CLIENT_ADMIN
+  CLIENT_USER
+}
+
+model Lead {
+  id       String   @id @default(cuid())
+  leadType LeadType @default(GENERAL_PROJECT)
+
+  fullName  String
+  workEmail String
+  company   String
+
+  phone    String?
+  website  String?
+  agentUrl String?
+  service  String?
+  message  String?
+
+  status String @default("NEW")
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([workEmail])
+  @@index([leadType])
+  @@index([createdAt])
+}
+
+model User {
+  id String @id @default(cuid())
+
+  fullName String
+
+  email String @unique
+
+  passwordHash String
+
+  role Role @default(EVALUATOR)
+
+  active Boolean @default(true)
+
+  lastLoginAt DateTime?
+
+  createdAt DateTime @default(now())
+
+  updatedAt DateTime @updatedAt
+
+  @@index([role])
+  @@index([active])
+  @@index([createdAt])
+}
