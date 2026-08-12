@@ -6,6 +6,10 @@ import { compare } from "bcryptjs";
 import { prisma } from "@/lib/prisma";
 import { signInSchema } from "@/lib/validation/auth";
 
+import type {
+  Role,
+} from "@/generated/prisma/client";
+
 
 export const {
   handlers,
@@ -81,7 +85,6 @@ export const {
           );
 
           return null;
-
         }
 
 
@@ -113,7 +116,6 @@ export const {
           );
 
           return null;
-
         }
 
 
@@ -129,7 +131,6 @@ export const {
           );
 
           return null;
-
         }
 
 
@@ -152,7 +153,6 @@ export const {
           );
 
           return null;
-
         }
 
 
@@ -168,17 +168,11 @@ export const {
         // ================================================
 
         return {
-
           id: user.id,
-
           name: user.fullName,
-
           email: user.email,
-
           role: user.role,
-
           active: user.active,
-
         };
 
       },
@@ -206,19 +200,18 @@ export const {
       if (user) {
 
         token.userId =
-          user.id!;
+          user.id as string;
 
         token.role =
-          user.role;
+          user.role as Role;
 
         token.active =
-          user.active;
+          user.active as boolean;
 
       }
 
 
       return token;
-
     },
 
 
@@ -234,19 +227,18 @@ export const {
       if (session.user) {
 
         session.user.id =
-          token.userId;
+          token.userId as string;
 
         session.user.role =
-          token.role;
+          token.role as Role;
 
         session.user.active =
-          token.active;
+          token.active as boolean;
 
       }
 
 
       return session;
-
     },
 
 
@@ -264,10 +256,16 @@ export const {
 
 
       /*
-        IMPORTANT:
-        Protect /staff and its children.
+        Protect:
 
-        Do not include /staff-login here.
+        /staff
+        /staff/admin
+        /staff/qa
+        /staff/evaluator
+        /staff/client
+        etc.
+
+        Do NOT protect /staff-login here.
       */
 
       if (
@@ -285,7 +283,6 @@ export const {
 
 
       return true;
-
     },
 
   },
@@ -315,16 +312,19 @@ export const {
           },
 
           data: {
-            lastLoginAt: new Date(),
+            lastLoginAt:
+              new Date(),
           },
 
         });
 
+
       } catch (error) {
 
         /*
-          Login should not completely fail simply because
-          lastLoginAt could not be updated.
+          Updating lastLoginAt is useful,
+          but failure here should not prevent
+          the user from logging in.
         */
 
         console.error(
